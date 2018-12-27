@@ -20,4 +20,8 @@ if ($cfg == null) {
 
 sock_post(get_gm_url(), $data);
 
+sleep(2);
+
+header("Location: anounce.html");
+
 ?>
