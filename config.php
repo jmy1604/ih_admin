@@ -7,16 +7,16 @@ function get_config() {
 }
 
 function get_gm_url() {
-    global $gm_server;
-    if ($gm_server == "") {
+    global $gm_server_ip;
+    if ($gm_server_ip == "") {
         $cfg = get_config();
         if ($cfg == null) {
             echo "not found cfg";
             return;
         }
-        $gm_server = "http://" . $cfg->GMServerIP . "/gm";
+        $gm_server_ip = $cfg->GMServerIP;
     }
-    return $gm_server;
+    return "https://" . $gm_server_ip . "/gm";
 }
 
 ?>
