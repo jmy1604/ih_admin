@@ -16,7 +16,7 @@ function get_gm_url() {
         }
         $gm_server_ip = $cfg->GMServerIP;
     }
-    return "https://" . $gm_server_ip . "/gm";
+    return "http://" . $gm_server_ip . "/gm";
 }
 
 ?>
