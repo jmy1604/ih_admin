@@ -1,7 +1,7 @@
 <?php
 
 function get_config() {
-    $jd = file_get_contents("config.json");
+    $jd = file_get_contents("../config.json");
     $data = json_decode($jd);
     return $data;
 }

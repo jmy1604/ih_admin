@@ -6,8 +6,6 @@
   * @return string
   */
  function send_post($url, $post_data) {
- 
-    //$postdata = http_build_query($post_data);
     $options = array(
         'http' => array(
              'method' => 'POST',
@@ -34,7 +32,7 @@ function sock_post($url, $query)
     $head .= "\r\n"; 
     $head .= trim($query);
     $write = fputs($fp, $head); 
-    print_r(fgets($fp));
+    //print_r(fgets($fp));
     while (!feof($fp)) 
     { 
         $line = fgets($fp); 
