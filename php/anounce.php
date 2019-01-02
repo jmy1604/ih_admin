@@ -1,10 +1,8 @@
 <?php
 include 'http_send.php';
-//include 'Requests/library/Requests.php';
 include 'format_gm_cmd.php';
 include 'config.php';
 
-//\Requests::register_autoloader();
 
 $content=$_POST["Content"];
 $duration=$_POST["Duration"];
@@ -21,7 +19,7 @@ if ($cfg == null) {
     return;
 }
 sock_post(get_gm_url(), $data);
-//sleep(2);
-//header("Location: anounce.html");
+sleep(2);
+header("Location: ../anounce.html");
 
 ?>
