@@ -3,64 +3,67 @@
 <head>
 <meta charset="utf-8">
 <title>IH GM Admin</title>
-<script type="text/javascript">
-  function processFiles(files) {
-    var file = files[0];
-    var reader = new FileReader();
-    reader.onload = function (e) {
-      // 这个事件发生，意为着数据准备好了
-      // 把它复制到页面的<div>元素中
-      var output = document.getElementById("fileOutput");  
-      output.value = e.target.result;
-    };
-    reader.readAsText(file);
-  }
-  function checkInputContent() {
-    var v = this.document.getElementById("fileOutput").value
-    console.log(v);
-    var jb = JSON.parse(v);
-    if (jb == null) {
-      alert("内容不能为空");
-      return false;
-    }
-    if (!Array.isArray(a)) {
-      alert("不是数组类型");
-      return false;
-    }
-
-    for (x in a) {
-      if (!x.hasOwnProperty("Id")) {
-        alert("没有 Id 属性");
-        return false;
-      }
-      if (x.hasOwnProperty("Text")) {
-        alert("没有 Text 属性");
-        return false;
-      }
-      if (x.Text == "") {
-        alert("Text 属性为空");
-        return false;
-      }
-    }
-
-    v = this.document.getElementById("duration");
-    if (v == "") {
-      alert("持续时间不能为空");
-      return false;
-    }
-    return true;
-  }
-</script>
 </head>
 <body>
     <h1>系统公告</h1>
-    <form action="php/anounce.php" method="post">
+    <form action="php/anounce.php" method="post" onsubmit="return checkInputContent()">
       <label>内容</label>
       <input type="file" id="fileInput" size="50" onchange="processFiles(this.files)"/><br>
       <textarea rows="10" cols="30" name="Content" id="fileOutput"></textarea><br>
       <label>持续时间(秒)</label><br>
       <input type="text" name="Duration" id="duration"><br><br>
-      <input type="submit" value="提交" onclick="return checkInputContent();">
+      <input type="submit" value="提交" onclick="">
     </form>
+
+    <script type="text/javascript">
+      function processFiles(files) {
+        var file = files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          // 这个事件发生，意为着数据准备好了
+          // 把它复制到页面的<div>元素中
+          var output = document.getElementById("fileOutput");  
+          output.value = e.target.result;
+        };
+        reader.readAsText(file);
+      }
+
+      function checkInputContent() {
+        var v = this.document.getElementById("fileOutput").value
+        console.log(v);
+        var jb = JSON.parse(v);
+        if (jb == null) {
+          alert("内容不能为空");
+          return false;
+        }
+        if (!Array.isArray(jb)) {
+          alert("不是数组类型");
+          return false;
+        }
+
+        for (i=0; i<jb.length; i++) {
+          x = jb[i]
+          if (!x.hasOwnProperty("Id")) {
+            alert("没有 Id 属性");
+            return false;
+          }
+          if (!x.hasOwnProperty("Text")) {
+            alert("没有 Text 属性");
+            return false;
+          }
+          if (x.Text == "") {
+            alert("Text 属性为空");
+            return false;
+          }
+        }
+
+        v = this.document.getElementById("duration");
+        if (v == "") {
+          alert("持续时间不能为空");
+          return false;
+        }
+        return true;
+      }
+    </script>
 </body>
 </html>
