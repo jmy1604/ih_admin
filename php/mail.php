@@ -10,7 +10,7 @@ $PlayerId = $_POST["PlayerId"];
 $PlayerAccount = $_POST["PlayerAccount"];
 
 $items = explode(',', $ItemList);
-if (items == null) {
+if ($items == null) {
     alert("物品数组列表为空或者格式错误");
     return;
 }
@@ -18,7 +18,7 @@ if (items == null) {
 $item_list = array();
 $item_num = count($items);
 for ($i=0; $i<$item_num; $i++) {
-    $item_list[i] = intval($items[i]);
+    $item_list[$i] = intval($items[$i]);
 }
 $cmd = array('PlayerAccount'=>$PlayerAccount, 'PlayerId'=>intval($PlayerId), 'MailTableID'=>intval($MailID), 'AttachItems'=>$item_list);
 $jd = json_encode($cmd);
