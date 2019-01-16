@@ -5,7 +5,7 @@ function generate_result_html($find, $replace, $source_file, $dest_file) {
     if ($fp != null) {
         $content = fread($fp, filesize($source_file)); 
         for ($i=0; $i<count($find); $i++) {
-            $content = str_replace($find, $replace, $content); 
+            $content = str_replace($find[$i], $replace[$i], $content); 
         }
         $handle = fopen($dest_file, "w"); //打开文件指针，创建文件 
         if (!is_writable($dest_file)) { 
