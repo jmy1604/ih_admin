@@ -2,7 +2,7 @@
 include 'http_send.php';
 include 'format_gm_cmd.php';
 include 'config.php';
-
+include 'utils.php';
 
 $num=$_POST["Num"];
 $string=$_POST["String"];
@@ -16,8 +16,6 @@ if ($cfg == null) {
     echo "get cfg failed";
     return;
 }
-sock_post(get_gm_url(), $data);
-//sleep(2);
-//header("Location: anounce.html");
+RequestsPost(get_gm_url(), $data);
 
 ?>
