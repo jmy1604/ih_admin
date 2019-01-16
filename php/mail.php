@@ -2,6 +2,7 @@
 include 'http_send.php';
 include 'format_gm_cmd.php';
 include 'config.php';
+include 'utils.php';
 
 
 $MailID = $_POST["MailID"];
@@ -26,28 +27,29 @@ $bd = base64_encode($jd);
 $data = format_gmcmd(3, $bd, "sys_mail");
 $cfg = get_config();
 if ($cfg == null) {
-    echo("get cfg failed");
+    failed_html("../generate_html/mail_failed.html", "../mail.html", -1, "get cfg failed");
     return;
 }
 
 $result = RequestsPost(get_gm_url(), $data);
 if ($result->status_code != 200) {
-    echo("Http请求失败");
+    failed_html("../generate_html/mail_failed.html", "../mail.html", -1, "Http请求失败");
     return;
 }
 
 $jsd = json_decode($result->body);
 if ($jsd == null) {
-    echo("返回结果json解码失败");
+    failed_html("../generate_html/mail_failed.html", "../mail.html", -1, "返回结果json解码失败");
     return;
 }
 
 $res = $jsd->{'Res'};
 if ($res < 0) {
     echo("返回错误码".$res);
+    failed_html("../generate_html/mail_failed.html", "../mail.html", $res, "返回错误码");
     return;
 }
 
-header("Location: ../done.html");
+done_html("../generate_html/mail_done.html", "../mail.html");
 
 ?>
