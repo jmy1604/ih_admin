@@ -11,6 +11,6 @@ $cmd = array('StringValue'=>$string, 'NumValue'=>intval($num));
 $jd = json_encode($cmd);
 $bd = base64_encode($jd);
 $data = format_gmcmd(0, $bd, "test");
-//sock_post(get_gm_url(), $data);
+RequestsPost(get_gm_url(), $data);
 
 ?>
