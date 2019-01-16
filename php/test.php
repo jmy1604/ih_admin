@@ -16,6 +16,6 @@ if ($cfg == null) {
     echo "get cfg failed";
     return;
 }
-RequestsPost(get_gm_url(), $data);
+sock_post(get_gm_url(), $data);
 
 ?>
