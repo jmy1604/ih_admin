@@ -5,16 +5,35 @@
 </head>
 <body>
     <h1>系统邮件</h1>
-    <form action="php/mail.php" method="post">
+    <form action="php/mail.php" method="post" onsubmit="return checkInputContent()">
         <label>邮件ID</label>
-        <input type="text" name="MailID"><br>
+        <input type="text" name="MailID" id="mail_id"><br>
         <label>物品队列</label>
-        <input type="text" name="ItemList"><br>
+        <input type="text" name="ItemList" id="item_list"><br>
         <label>玩家ID</label>
-        <input type="text" name="PlayerId"><br>
-        <label>玩家账号</label>
-        <input type="text" name="PlayerAccount"><br>
+        <input type="text" name="PlayerId" id="player_id"><br>
         <input type="submit" value="提交">
     </form>
+    <script type="text/javascript">
+        function checkInputContent() {
+        var v = this.document.getElementById("mail_id").value;
+        console.log(v);
+        if (v == "") {
+          alert("邮件ID不能为空");
+          return false;
+        }
+        v = this.document.getElementById("item_list").value;
+        if (v == "") {
+          alert("物品队列不能为空");
+          return false;
+        }
+        v = this.document.getElementById("player_id").value;
+        if (v == "") {
+          alert("是否群发");
+          return true;
+        }
+        return true;
+      }
+    </script>
 </body>
 </html>
