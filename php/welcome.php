@@ -10,32 +10,34 @@
 session_start ();
 //判断code存不存在，如果不存在，说明异常登录
 if (isset ( $_SESSION ["code"] )) {
-	?>
-欢迎登录<?php
+?>
+欢迎登录
+<?php
     //显示登录用户名
 	echo "${_SESSION["username"]}";
-	?><br>
-您的ip：<?php
+?><br>
+您的ip：
+<?php
     //显示ip
 	echo "${_SERVER['REMOTE_ADDR']}";
-	?>
+?>
 <br>
 您的语言：
 <?php
     //使用的语言
 	echo "${_SERVER['HTTP_ACCEPT_LANGUAGE']}";
-	?>
+?>
 <br>
 浏览器版本：
 <?php
     //浏览器版本信息
 	echo "${_SERVER['HTTP_USER_AGENT']}";
-	?>
+?>
 <a href="exit.php">退出登录</a>
 <?php
 } else {
     //code不存在，调用exit.php 退出登录
-	?>
+?>
 <script type="text/javascript">
 	alert("退出登录");
 	window.location.href="exit.php";

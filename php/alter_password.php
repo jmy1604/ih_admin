@@ -24,7 +24,7 @@
 		$dbpassword = $row ["password"];
 	}
 	if (is_null ( $dbusername )) {
-		?>
+	?>
 	<script type="text/javascript">
 		alert("用户名不存在");
 		window.location.href="alter_password.html";
@@ -32,7 +32,7 @@
 	<?php
 	}
 	if ($oldpassword != $dbpassword) {
-		?>
+	?>
 	<script type="text/javascript">
 		alert("密码错误");
 		window.location.href="alter_password.html";

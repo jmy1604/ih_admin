@@ -61,7 +61,7 @@
 			}
         }
     //关闭数据库连接，如不关闭，下次连接时会出错
-	mysqli_close($con);
+		mysqli_close($con);
 	?>
 </body>
 </html>
