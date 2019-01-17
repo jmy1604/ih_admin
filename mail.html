@@ -31,8 +31,9 @@
         }
         v = this.document.getElementById("player_id").value;
         if (v == "") {
-          alert("是否群发");
-          return true;
+          if (!confirm("是否群发")) {
+              return false;
+          }
         }
         return true;
       }
