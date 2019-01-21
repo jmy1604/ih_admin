@@ -7,14 +7,26 @@
 <body>
  
 <?php
+
 session_start ();
-//判断code存不存在，如果不存在，说明异常登录
-if (isset ( $_SESSION ["code"] )) {
+$login_state = $_SESSION['login_state'];
+if ($login_state == null || $login_state <= 0) {
+?>
+	<a href="exit.php">退出登录</a>
+	<script type="text/javascript">
+		alert("退出登录");
+		window.location.href="exit.php";
+	</script>
+	<br>
+<?php
+	failed_html("../generate_html/welcome_failed.html", "../login.html", -1, "没有登陆");
+    return;
+}
 ?>
 欢迎登录
 <?php
     //显示登录用户名
-	echo "${_SESSION["username"]}";
+	echo "${_SESSSION['user_name']}";
 ?><br>
 您的ip：
 <?php
@@ -33,19 +45,9 @@ if (isset ( $_SESSION ["code"] )) {
     //浏览器版本信息
 	echo "${_SERVER['HTTP_USER_AGENT']}";
 ?>
-<a href="exit.php">退出登录</a>
-<?php
-} else {
-    //code不存在，调用exit.php 退出登录
-?>
-<script type="text/javascript">
-	alert("退出登录");
-	window.location.href="exit.php";
-</script>
-<?php
-}
-?>
-<br>
 	<a href="alter_password.html">修改密码</a>
+	<script type="text/javascript">
+		window.location.href="../gm_mgr.html";
+	</script>
 </body>
 </html>

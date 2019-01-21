@@ -4,6 +4,12 @@ include 'format_gm_cmd.php';
 include 'config.php';
 include 'utils.php';
 
+session_start();
+$login_state = $_SESSION['login_state'];
+if ($login_state <= 0) {
+    failed_html("../generate_html/mail_failed.html", "../login.html", -1, "没有登陆");
+    return;
+}
 
 $MailID = $_POST["MailID"];
 $ItemList = $_POST["ItemList"];
@@ -12,7 +18,7 @@ $PlayerAccount = $_POST["PlayerAccount"];
 
 $items = explode(',', $ItemList);
 if ($items == null) {
-    alert("物品数组列表为空或者格式错误");
+    echo("物品数组列表为空或者格式错误");
     return;
 }
 

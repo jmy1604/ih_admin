@@ -1,3 +1,7 @@
+<?php
+	//登录系统开启一个session内容
+	session_start();
+?>
 <!doctype html>
 <html>
 <head>
@@ -5,9 +9,7 @@
 	<title>登录系统的后台执行过程</title>
 </head>
 <body>
-    <?php 
-        //登录系统开启一个session内容
-        session_start();
+	<?php 
         //获取html中的用户名（通过post请求）
         $username=$_REQUEST["username"];
         //获取html中的密码（通过post请求）
@@ -50,9 +52,8 @@
 	<?php 
 			}
 			else {
-                $_SESSION["username"]=$username;
-                //给session附一个随机值，防止用户直接通过调用界面访问welcome.php
-				$_SESSION["code"]=mt_rand(0, 100000);
+				$_SESSION['login_state'] = 1;
+				$_SESSION['user_name'] = $username;
 	?>
 	<script type="text/javascript">
 		window.location.href="welcome.php";
