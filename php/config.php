@@ -1,21 +1,24 @@
 <?php
 
 function get_config() {
-    $jd = file_get_contents("../config.json");
-    $data = json_decode($jd);
-    return $data;
+    global $config;
+    if ($config == null) {
+       $jd = file_get_contents("../config.json");
+       if ($jd == null) {
+            echo "not found config.json";
+            return null;
+       }
+       $config= json_decode($jd);
+    }
+    return $config;
 }
 
 function get_gm_url() {
-    global $gm_server_ip;
-    if ($gm_server_ip == "") {
-        $cfg = get_config();
-        if ($cfg == null) {
-            echo "not found cfg";
-            return;
-        }
-        $gm_server_ip = $cfg->GMServerIP;
+    $c = get_config();
+    if ($c == null) {
+        return "";
     }
+    $gm_server_ip = $c->GMServerIP;
     return "http://" . $gm_server_ip . "/gm";
 }
 

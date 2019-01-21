@@ -1,4 +1,5 @@
 <?php
+	include 'config.php';
 	//登录系统开启一个session内容
 	session_start();
 ?>
@@ -17,7 +18,11 @@
  
         //连接mysql 数据库，账户名root ，密码root
 		//$con = mysqli_connect("localhost", "root", "", "ih_admin");
-		$dbc= new mysqli("localhost","root","","ih_admin");
+		$c = get_config();
+		if ($c == null) {
+			die("配置找不到");
+		}
+		$dbc= new mysqli($c->DBIP, $c->DBUser, $c->DBPassword, $c->DBName);
     	if(!$dbc)  {
       		die("数据库链接错误".$mysql_error());
     	}
