@@ -11,7 +11,7 @@ if ($login_state <= 0) {
     return;
 }*/
 
-$player_id=$_POST["PlayerId"];
+$player_id=$_POST["player_id"];
 $cmd = array('Id'=>intval($player_id));
 $jd = json_encode($cmd);
 $bd = base64_encode($jd);

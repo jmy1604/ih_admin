@@ -5,21 +5,39 @@
 </head>
 <body>
     <h1>玩家信息</h1>
-    <form action="php/player_info.php" method="post" onsubmit="return checkInputContent()">
+    <form action="" onsubmit="return checkInputContent()">
         <label>玩家ID</label>
-        <input type="text" name="PlayerId" id="player_id"><br>
-        <input type="submit" value="提交">
+        <input type="text" id="player_id"><br>
+        <input type="submit" value="提交" onclick="getPlayerInfo()">
     </form>
+    <p>玩家信息: <span id="player_info"></span></p>
     <br><a href="gm.html">返回</a><br>
 
     <script type="text/javascript">
       function checkInputContent() {
-        v = this.document.getElementById("player_id").value;
-        if (v == "") {
+        player_id = this.document.getElementById("player_id").value;
+        if (player_id == "") {
           alert("玩家ID不能为空");
           return false;
         }
         return true;
+      }
+      function getPlayerInfo() {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {
+          xmlhttp = new XMLHttpRequest();
+        } else {
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            document.getElementById("player_info").innerHTML = xmlhttp.responseText;
+          }
+        }
+        xmlhttp.open("POST", "php/player_info.php", true);
+        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        player_id = this.document.getElementById("player_id").value;
+        xmlhttp.send("player_id="+player_id);
       }
     </script>
 </body>
