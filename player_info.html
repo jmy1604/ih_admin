@@ -23,22 +23,40 @@
         return true;
       }
       function getPlayerInfo() {
-        var xmlhttp;
-        if (window.XMLHttpRequest) {
-          xmlhttp = new XMLHttpRequest();
-        } else {
-          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function() {
-          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-            document.getElementById("player_info").innerHTML = xmlhttp.responseText;
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("POST", "php/player_info.php", true);
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.onload = function() {
+          alert("load " + xmlhttp.readyState);
+          if (xmlhttp.status == 200) {
+            this.document.getElementById("player_info").innerHTML = xmlhttp.responseText;   
           }
         }
-        xmlhttp.open("POST", "php/player_info.php", true);
-        xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+        xmlhttp.onabort = function() {
+          alert("abort " + xmlhttp.readyState);
+        }
+        xmlhttp.onerror = function() {
+          alert("error " + xmlhttp.readyState);
+        }
+        xmlhttp.onloadstart = function() {
+          alert("loadstart " + xmlhttp.readyState);
+        }
+        xmlhttp.onprogress = function() {
+          alert("progress " + xmlhttp.readyState);
+        }
+        xmlhttp.onreadystatechage = function() {
+          alert("readystatechage " + xmlhttp.readyState);
+        }
+        xmlhttp.ontimeout = function() {
+          alert("timeout " + xmlhttp.readyState);
+        }
+        xmlhttp.onloadend = function() {
+          alert("loadend " + xmlhttp.readyState);
+        }
         player_id = this.document.getElementById("player_id").value;
-        xmlhttp.send("player_id="+player_id);
+        xmlhttp.send("player_id=" + player_id);
       }
+      
     </script>
 </body>
 </html>
