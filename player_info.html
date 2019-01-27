@@ -2,61 +2,86 @@
 <html>
 <head>
 <meta charset="utf-8">
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 <body>
     <h1>玩家信息</h1>
     <form action="" onsubmit="return checkInputContent()">
         <label>玩家ID</label>
         <input type="text" id="player_id"><br>
-        <input type="submit" value="提交" onclick="getPlayerInfo()">
+        <input type="submit" id="submit" value="提交" onclick="getPlayerInfo()">
     </form>
-    <p>玩家信息: <span id="player_info"></span></p>
+    <p>玩家信息: <div id="player_info"></div></p>
     <br><a href="gm.html">返回</a><br>
 
     <script type="text/javascript">
       function checkInputContent() {
-        player_id = this.document.getElementById("player_id").value;
+        player_id = document.getElementById("player_id").value;
         if (player_id == "") {
           alert("玩家ID不能为空");
           return false;
         }
         return true;
       }
+      var xmlhttp;
       function getPlayerInfo() {
-        xmlhttp = new XMLHttpRequest();
+        $.ajax({
+          url: 'php/player_info.php',
+          type: 'POST',
+          data: 'player_id='+$("#player_id").val(),
+          async: true,
+          cache: false,
+          contentType: "application/x-www-form-urlencoded",
+          processData: false,
+          success: function (data, status) {
+            //document.getElementById("player_info").innerHTML = data;
+            alert('请求发送成功 状态 ' + status + '数据 ' + data);
+          },
+          error: function (returndata) {
+            alert('请求发送失败');
+          }
+        });
+        /*xmlhttp = new XMLHttpRequest();
+        xmlhttp.onload = onload;
+        xmlhttp.onabort = onabort;
+        xmlhttp.onerror = onerror;
+        xmlhttp.onloadstart = onloadstart;
+        xmlhttp.onprogress = onprogress;
+        xmlhttp.onreadystatechange = onreadystatechange;
+        xmlhttp.ontimeout = ontimeout;
+        xmlhttp.onloadend = onloadend;
         xmlhttp.open("POST", "php/player_info.php", true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xmlhttp.onload = function() {
-          alert("load " + xmlhttp.readyState);
-          if (xmlhttp.status == 200) {
-            this.document.getElementById("player_info").innerHTML = xmlhttp.responseText;   
-          }
-        }
-        xmlhttp.onabort = function() {
-          alert("abort " + xmlhttp.readyState);
-        }
-        xmlhttp.onerror = function() {
-          alert("error " + xmlhttp.readyState);
-        }
-        xmlhttp.onloadstart = function() {
-          alert("loadstart " + xmlhttp.readyState);
-        }
-        xmlhttp.onprogress = function() {
-          alert("progress " + xmlhttp.readyState);
-        }
-        xmlhttp.onreadystatechage = function() {
-          alert("readystatechage " + xmlhttp.readyState);
-        }
-        xmlhttp.ontimeout = function() {
-          alert("timeout " + xmlhttp.readyState);
-        }
-        xmlhttp.onloadend = function() {
-          alert("loadend " + xmlhttp.readyState);
-        }
-        player_id = this.document.getElementById("player_id").value;
-        xmlhttp.send("player_id=" + player_id);
+        player_id = document.getElementById("player_id").value;
+        xmlhttp.send("player_id=" + player_id);*/
       }
-      
+      function onload() {
+        alert("load " + xmlhttp.readyState + " " + xmlhttp.status + " " + xmlhttp.responseText);
+        if (xmlhttp.status == 200) {
+          document.getElementById("player_info").innerHTML = xmlhttp.responseText;   
+        }
+      }
+      function onabort() {
+        alert("abort " + xmlhttp.readyState);
+      }
+      function onerror() {
+        alert("error " + xmlhttp.readyState);
+      }
+      function onloadstart() {
+        alert("loadstart " + xmlhttp.readyState);
+      }
+      function onprogress() {
+        alert("progress " + xmlhttp.readyState);
+      }
+      function onreadystatechange() {
+        alert("readystatechange " + xmlhttp.readyState);
+      }
+      function ontimeout() {
+        alert("timeout " + xmlhttp.readyState);
+      }
+      function onloadend() {
+        alert("loadend " + xmlhttp.readyState);
+      }
     </script>
 </body>
 </html>
