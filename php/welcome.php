@@ -47,7 +47,7 @@ if ($login_state == null || $login_state <= 0) {
 ?>
 	<a href="alter_password.html">修改密码</a>
 	<script type="text/javascript">
-		window.location.href="../gm_mgr.html";
+		window.location.href="../gm.html";
 	</script>
 </body>
 </html>

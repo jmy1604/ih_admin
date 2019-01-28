@@ -7,6 +7,7 @@ session_start();
 $login_state = $_SESSION["login_state"];
 if ($login_state <= 0) {
     echo("错误信息: 没有登陆");
+    header('Location: ../login.html');
     return;
 }
 
@@ -23,6 +24,6 @@ if ($result->status_code != 200) {
     return;
 }
 
-echo("操作成功");
+echo("操作完成");
 
 ?>
