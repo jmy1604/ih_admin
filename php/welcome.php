@@ -19,7 +19,7 @@ if ($login_state == null || $login_state <= 0) {
 	</script>
 	<br>
 <?php
-	failed_html("../generate_html/welcome_failed.html", "../login.html", -1, "没有登陆");
+	echo("错误信息: 没有登陆");
     return;
 }
 ?>
