@@ -2,7 +2,6 @@
 include 'http_send.php';
 include 'format_gm_cmd.php';
 include 'config.php';
-include 'utils.php';
 
 session_start();
 $login_state = $_SESSION['login_state'];

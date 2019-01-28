@@ -2,7 +2,6 @@
 include 'http_send.php';
 include 'format_gm_cmd.php';
 include 'config.php';
-include 'utils.php';
 
 session_start();
 $login_state = $_SESSION['login_state'];
@@ -14,7 +13,6 @@ if ($login_state <= 0) {
 $MailID = $_POST["MailID"];
 $ItemList = $_POST["ItemList"];
 $PlayerId = $_POST["PlayerId"];
-$PlayerAccount = $_POST["PlayerAccount"];
 
 $items = explode(',', $ItemList);
 if ($items == null) {
@@ -27,7 +25,7 @@ $item_num = count($items);
 for ($i=0; $i<$item_num; $i++) {
     $item_list[$i] = intval($items[$i]);
 }
-$cmd = array('PlayerAccount'=>$PlayerAccount, 'PlayerId'=>intval($PlayerId), 'MailTableID'=>intval($MailID), 'AttachItems'=>$item_list);
+$cmd = array('PlayerId'=>intval($PlayerId), 'MailTableID'=>intval($MailID), 'AttachItems'=>$item_list);
 $jd = json_encode($cmd);
 $bd = base64_encode($jd);
 $data = format_gmcmd(3, $bd, "sys_mail");
