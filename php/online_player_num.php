@@ -11,8 +11,8 @@ if ($login_state <= 0) {
     return;
 }
 
-$player_id=$_POST["server_id"];
-$cmd = array('Id'=>intval($server_id));
+$server_id=$_POST["server_id"];
+$cmd = array('ServerId'=>intval($server_id));
 $jd = json_encode($cmd);
 $bd = base64_encode($jd);
 $data = format_gmcmd(5, $bd, "online_player_num");

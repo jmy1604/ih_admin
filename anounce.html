@@ -21,8 +21,6 @@
         var file = files[0];
         var reader = new FileReader();
         reader.onload = function (e) {
-          // 这个事件发生，意为着数据准备好了
-          // 把它复制到页面的<div>元素中
           var output = document.getElementById("fileOutput");  
           output.value = e.target.result;
         };

@@ -6,11 +6,6 @@
 </head>
 <body>
     <h1>玩家信息</h1>
-    <!--<form action="" onsubmit="return checkInputContent()">
-        <label>玩家ID</label>
-        <input type="text" id="player_id"><br>
-        <input type="submit" id="submit" value="提交" onclick="getPlayerInfo()">
-    </form>-->
     <input type="text" id="player_id">
     <input type="button" id="submit" value="提交" onclick="getPlayerInfo()">
     <p>玩家信息: <div id="player_info"></div></p>
@@ -27,6 +22,9 @@
       }
       var xmlhttp;
       function getPlayerInfo() {
+        if (!checkInputContent()) {
+          return;
+        }
         $.ajax({
           url: 'php/player_info.php',
           type: 'POST',
@@ -43,46 +41,6 @@
             alert('请求发送失败');
           }
         });
-        /*xmlhttp = new XMLHttpRequest();
-        xmlhttp.onload = onload;
-        xmlhttp.onabort = onabort;
-        xmlhttp.onerror = onerror;
-        xmlhttp.onloadstart = onloadstart;
-        xmlhttp.onprogress = onprogress;
-        xmlhttp.onreadystatechange = onreadystatechange;
-        xmlhttp.ontimeout = ontimeout;
-        xmlhttp.onloadend = onloadend;
-        xmlhttp.open("POST", "php/player_info.php", true);
-        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        player_id = document.getElementById("player_id").value;
-        xmlhttp.send("player_id=" + player_id);*/
-      }
-      function onload() {
-        alert("load " + xmlhttp.readyState + " " + xmlhttp.status + " " + xmlhttp.responseText);
-        if (xmlhttp.status == 200) {
-          document.getElementById("player_info").innerHTML = xmlhttp.responseText;   
-        }
-      }
-      function onabort() {
-        alert("abort " + xmlhttp.readyState);
-      }
-      function onerror() {
-        alert("error " + xmlhttp.readyState);
-      }
-      function onloadstart() {
-        alert("loadstart " + xmlhttp.readyState);
-      }
-      function onprogress() {
-        alert("progress " + xmlhttp.readyState);
-      }
-      function onreadystatechange() {
-        alert("readystatechange " + xmlhttp.readyState);
-      }
-      function ontimeout() {
-        alert("timeout " + xmlhttp.readyState);
-      }
-      function onloadend() {
-        alert("loadend " + xmlhttp.readyState);
       }
     </script>
 </body>
