@@ -10,10 +10,14 @@
     <input type="radio" name="pid" id="sel_player_id" checked="checked">玩家ID<br>
     <input type="radio" name="pid" id="sel_player_account">玩家账号<br>
     <input type="text" id="player_id">
-    <input type="button" id="submit" value="提交" onclick="banPlayer(1)">
-    <input type="button" id="submit" value="解除封号" onclick="banPlayer(0)">
+    <input type="button" id="ban" value="提交" onclick="banPlayer(1)">
+    <input type="button" id="free" value="解除封号" onclick="banPlayer(0)">
     <p>结果: <div id="ban_result"></div></p>
     <br><a href="gm.html">返回</a><br>
+    <div id="ban_list">
+        <input type="button" id="bl" value="获取封号玩家列表" onclick="getBanList()">
+        <div id="ban_list_content"></div>
+    </div>
 
     <script type="text/javascript">
         function checkInputContent() {
@@ -30,7 +34,7 @@
             }
             if ($ban_or_free > 0) {
                 if (!confirm("确定封号?")) {
-                return;
+                    return;
                 }
             }
             $.ajax({
@@ -42,11 +46,27 @@
                 contentType: "application/x-www-form-urlencoded",
                 processData: false,
                 success: function (resultdata, status) {
-                document.getElementById("ban_result").innerHTML = resultdata;
-                    alert('请求发送成功 状态 ' + status + '数据 ' + resultdata);
+                    document.getElementById("ban_list_content").innerHTML = result_data;
+                    alert('请求发送成功 状态 ' + status + ' 数据 ' + resultdata);
                 },
                 error: function (returndata) {
                     alert('请求发送失败');
+                }
+            });
+        }
+        function getBanList() {
+            $.ajax({
+                url: 'php/ban_list.php',
+                type: 'POST',
+                async: true,
+                cache: false,
+                contentType: 'application/x-www-form-urlencoded',
+                processData: false,
+                success: function(result_data, status) {
+                    alert('请求发送成功 状态 ' + status + ' 数据 ' + result_data);
+                },
+                error: function(return_data) {
+                    alert("请求发送失败");
                 }
             });
         }
