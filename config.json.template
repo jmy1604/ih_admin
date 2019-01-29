@@ -4,5 +4,5 @@
     "DBUser": "root",
     "DBPassword": "",
     "DBName": "ih_admin",
-    "DBNameLogin: "ih_login_server"
+    "DBNameLogin": "ih_login_server"
 }

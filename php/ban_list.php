@@ -21,7 +21,7 @@ $dbc= new mysqli($c->DBIP, $c->DBUser, $c->DBPassword, $c->DBNameLogin);
 if(!$dbc)  {
     echo("错误信息: 数据库链接错误".$mysql_error());
 }
-//查出对应用户名的信息，isdelete表示在数据库已被删除的内容
+
 $result=mysqli_query($dbc, "select * from BanPlayers where username ='$username';");
 //while循环将$result中的结果找出来
 while ($row=mysqli_fetch_array($result)) {
