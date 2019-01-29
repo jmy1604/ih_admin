@@ -3,5 +3,6 @@
     "DBIP": "127.0.0.1",
     "DBUser": "root",
     "DBPassword": "",
-    "DBName": "ih_admin"
+    "DBName": "ih_admin",
+    "DBNameLogin: "ih_login_server"
 }
