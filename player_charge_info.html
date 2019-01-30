@@ -38,10 +38,7 @@
             alert('请求发送成功 状态 ' + status + '数据 ' + result_data);
           },
           error: function (xhr, textStatus, error) {
-            //alert('请求发送失败 ' + return_data);
-            console.error(xhr.statusText);
-            console.error(textStatus);
-            console.error(error);
+            alert('请求发送失败 ' + xhr.statusText + " " + textStatus + " " + error);
           }
         });
       }
