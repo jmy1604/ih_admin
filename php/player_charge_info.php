@@ -30,12 +30,12 @@ define("PAY_TABLE_BUNDLE_ID", "BundleID");
 define("PAY_TABLE_ACCOUNT", "玩家账号");
 define("PAY_TABLE_PLAYER_ID", "玩家ID");
 define("PAY_TABLE_TIME", "购买时间");
-define("TAB_HEADERS", array(PAY_TABLE_ORDER_ID=>'OrderId', PAY_TABLE_BUNDLE_ID=>'BundleId', PAY_TABLE_ACCOUNT=>'Account', PAY_TABLE_PLAYER_ID=>'PlayerId', PAY_TABLE_TIME=>'PayTimeStr'));
+$tab_headers = array(PAY_TABLE_ORDER_ID=>'OrderId', PAY_TABLE_BUNDLE_ID=>'BundleId', PAY_TABLE_ACCOUNT=>'Account', PAY_TABLE_PLAYER_ID=>'PlayerId', PAY_TABLE_TIME=>'PayTimeStr');
 
 echo("请求完成");
 
 echo '<table border="1"><tr>' ;
-foreach (TAB_HEADERS as $k=>$v) {
+foreach ($tab_headers as $k=>$v) {
     echo '<th>'. $k . '</th>';
 }
 echo '</tr>';
@@ -43,11 +43,11 @@ echo '</tr>';
 function get_pay_list($dbc, $table_name, $player_id) {
     $result=mysqli_query($dbc, "select * from $table_name where PlayerId=".$player_id.";");
     while ($row=mysqli_fetch_array($result)) {
-        $order_id = $row[TAB_HEADERS[PAY_TABLE_ORDER_ID]];
-        $bundle_id = $row[TAB_HEADERS[PAY_TABLE_BUNDLE_ID]];
-        $account = $row[TAB_HEADERS[PAY_TABLE_ACCOUNT]];
-        $player_id = $row[TAB_HEADERS[PAY_TABLE_PLAYER_ID]];
-        $start_time = $row[TAB_HEADERS[PAY_TABLE_TIME]];
+        $order_id = $row[$tab_headers[PAY_TABLE_ORDER_ID]];
+        $bundle_id = $row[$tab_headers[PAY_TABLE_BUNDLE_ID]];
+        $account = $row[$tab_headers[PAY_TABLE_ACCOUNT]];
+        $player_id = $row[$tab_headers[PAY_TABLE_PLAYER_ID]];
+        $start_time = $row[$tab_headers[PAY_TABLE_TIME]];
         echo '<tr><td>' . $order_id . '</td><td>' . $bundle_id . '</td><td>' . $account . '</td><td>' . $player_id . '</td><td>' . $start_time . '</td></tr>';
     }
 }
