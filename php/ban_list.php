@@ -20,38 +20,38 @@ if ($c == null) {
 $dbc= new mysqli($c->DBIP, $c->DBUser, $c->DBPassword, $c->DBNameLogin);
 if(!$dbc)  {
     echo("错误信息: 数据库链接错误".$mysql_error());
+    return;
 }
 
-$result=mysqli_query($dbc, "select * from BanPlayers where username ='$username';");
-//while循环将$result中的结果找出来
+$result=mysqli_query($dbc, "select * from BanPlayers;");
+
+define("BAN_LIST_TABLE_UNIQUE_ID", "玩家唯一ID");
+define("BAN_LIST_TABLE_ACCOUNT", "玩家账号");
+define("BAN_LIST_TABLE_PLAYER_ID", "玩家ID");
+define("BAN_LIST_TABLE_TIME", "封号时间");
+$tab_headers = array(BAN_LIST_TABLE_UNIQUE_ID=>'UniqueId', BAN_LIST_TABLE_ACCOUNT=>'Account', BAN_LIST_TABLE_PLAYER_ID=>'PlayerId', BAN_LIST_TABLE_TIME=>'StartTimeStr');
+
+$tab_str = '<table border="1" style="margin: auto;">';
+$tab_str = $tab_str . '<tr>';
+foreach ($tab_headers as $k=>$v) {
+    $tab_str = $tab_str . '<th>'. $k . '</th>';
+}
+$tab_str = $tab_str . '</tr>';
+
+$uniqueId; $account; $player_id; $start_time;
 while ($row=mysqli_fetch_array($result)) {
-	$dbusername=$row["username"];
-	$dbpassword=$row["password"];
+	$unique_id = $row[$tab_headers[BAN_LIST_TABLE_UNIQUE_ID]];
+    $account = $row[$tab_headers[BAN_LIST_TABLE_ACCOUNT]];
+    $player_id = $row[$tab_headers[BAN_LIST_TABLE_PLAYER_ID]];
+    $start_time = $row[$tab_headers[BAN_LIST_TABLE_TIME]];
+    $tab_str = $tab_str . '<td>' . $unique_id . '</td>';
+    $tab_str = $tab_str . '<td>' . $account . '</td>';
+    $tab_str = $tab_str . '<td>' . $player_id . '</td>';
+    $tab_str = $tab_str . '<td>' . $start_time . '</td>';
 }
+$tab_str = $tab_str . '</table>';
 
-$ban_or_free = $_POST["ban_or_free"];
-$cmd = array('PlayerId'=>intval($player_id), 'BanOrFree'=>intval($ban_or_free));
-$jd = json_encode($cmd);
-$bd = base64_encode($jd);
-$data = format_gmcmd(7, $bd, "ban_player");
-$result = RequestsPost(get_gm_url(), $data);
-if ($result->status_code != 200) {
-    echo("错误信息: Http请求失败");
-    return;
-}
-
-$jsd = json_decode($result->body);
-if ($jsd == null) {
-    echo("错误信息: 返回结果json解码失败");
-    return;
-}
-
-$res = $jsd->{'Res'};
-if ($res < 0) {
-    echo("返回错误码: " . $res);
-    return;
-}
-
+echo $tab_str;
 echo("请求完成");
 
 ?>

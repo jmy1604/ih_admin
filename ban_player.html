@@ -3,9 +3,22 @@
 <head>
 <meta charset="utf-8">
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<style>
+    #ban_list
+    {
+        top: 10px;
+        text-align: center;
+        margin-bottom: 0;
+    }
+    #ban_list_content
+    {
+        position: relative;
+    }
+</style>
 </head>
 <body>
     <h1>封号</h1>
+    <div id="ban_player">
     <label>玩家ID或账号</label><br>
     <input type="radio" name="pid" id="sel_player_id" checked="checked">玩家ID<br>
     <input type="radio" name="pid" id="sel_player_account">玩家账号<br>
@@ -14,9 +27,10 @@
     <input type="button" id="free" value="解除封号" onclick="banPlayer(0)">
     <p>结果: <div id="ban_result"></div></p>
     <br><a href="gm.html">返回</a><br>
-    <div id="ban_list">
+    </div>
+    <div id="ban_list" value="封号玩家列表">
         <input type="button" id="bl" value="获取封号玩家列表" onclick="getBanList()">
-        <div id="ban_list_content"></div>
+        <span id="ban_list_content"></span>
     </div>
 
     <script type="text/javascript">
@@ -45,9 +59,9 @@
                 cache: false,
                 contentType: "application/x-www-form-urlencoded",
                 processData: false,
-                success: function (resultdata, status) {
-                    document.getElementById("ban_list_content").innerHTML = result_data;
-                    alert('请求发送成功 状态 ' + status + ' 数据 ' + resultdata);
+                success: function (result_data, status) {
+                    alert('请求发送成功 状态 ' + status + ' 数据 ' + result_data);
+                    document.getElementById("ban_result").innerHTML = result_data;
                 },
                 error: function (returndata) {
                     alert('请求发送失败');
@@ -64,6 +78,7 @@
                 processData: false,
                 success: function(result_data, status) {
                     alert('请求发送成功 状态 ' + status + ' 数据 ' + result_data);
+                    document.getElementById("ban_list_content").innerHTML = result_data;
                 },
                 error: function(return_data) {
                     alert("请求发送失败");
