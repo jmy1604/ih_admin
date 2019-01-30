@@ -40,7 +40,7 @@ foreach ($tab_headers as $k=>$v) {
 }
 echo '</tr>';
 
-function get_pay_list($dbc, $table_name, $player_id) {
+function get_pay_list($dbc, $table_name, $player_id, $tab_headers) {
     $result=mysqli_query($dbc, "select * from $table_name where PlayerId=".$player_id.";");
     while ($row=mysqli_fetch_array($result)) {
         $order_id = $row[$tab_headers[PAY_TABLE_ORDER_ID]];
@@ -52,8 +52,8 @@ function get_pay_list($dbc, $table_name, $player_id) {
     }
 }
 
-get_pay_list($dbc, 'ApplePays', $player_id);
-get_pay_list($dbc, 'GooglePays', $player_id);
+get_pay_list($dbc, 'ApplePays', $player_id, $tab_headers);
+get_pay_list($dbc, 'GooglePays', $player_id, $tab_headers);
 echo '</table>';
 
 ?>
