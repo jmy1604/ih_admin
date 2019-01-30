@@ -7,7 +7,9 @@
 <body>
     <h1>充值信息</h1>
     <label>玩家ID</label>
-    <input type="text" id="player_id">
+    <input type="text" id="player_id"><br>或者<br>
+    <lable>订单ID</lable>
+    <input type="text" id="order_id">
     <input type="button" id="submit" value="提交" onclick="getPlayerChargeInfo()">
     <p>结果: <div id="charge_info"></div></p>
     <br><a href="gm.html">返回</a><br>
@@ -15,8 +17,9 @@
     <script type="text/javascript">
       function checkInputContent() {
         player_id = document.getElementById("player_id").value;
-        if (player_id == "") {
-          alert("玩家ID不能为空");
+        order_id = document.getElementById("order_id").value;
+        if (player_id == "" && order_id == "") {
+          alert("玩家ID和订单ID不能都为空");
           return false;
         }
         return true;
@@ -28,7 +31,7 @@
         $.ajax({
           url: 'php/player_charge_info.php',
           type: 'POST',
-          data: 'player_id='+$('#player_id').val(),
+          data: 'player_id='+$('#player_id').val()+'&order_id='+$('#order_id').val(),
           async: true,
           cache: false,
           contentType: "application/x-www-form-urlencoded",
