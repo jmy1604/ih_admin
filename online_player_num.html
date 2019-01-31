@@ -13,6 +13,29 @@
     <br><a href="gm.html">返回</a><br>
 
     <script type="text/javascript">
+      function getOnlineNumData(data) {
+        var obj;
+        try {
+          obj = JSON.parse(data);
+        } catch(e) {
+          return resultdata;
+        }
+        if (typeof(obj) != "object") {
+          return resultdata;
+        }
+        if (!Array.isArray(obj.PlayerNum)) {
+          alert("不是数组类型");
+          return resultdata;
+        }
+
+        var str = '<table border="1"><tr><th>Server Id</th><th>人数</th></tr>';
+        var a = obj.PlayerNum;
+        for (i=0; i<a.length/2; i++) {
+          str += ('<tr><td>' + a[2*i] + '</td><td>' + a[2*i+1] + '</td></tr>');
+        }
+        str += '</table>';
+        return str;
+      }
       function getOnlinePlayerNum() {
         $.ajax({
           url: 'php/online_player_num.php',
@@ -23,7 +46,7 @@
           contentType: "application/x-www-form-urlencoded",
           processData: false,
           success: function (resultdata, status) {
-            document.getElementById("online_player_num").innerHTML = resultdata;
+            document.getElementById("online_player_num").innerHTML = getOnlineNumData(resultdata);
             alert('请求发送成功 状态 ' + status + '数据 ' + resultdata);
           },
           error: function (returndata) {

@@ -21,7 +21,36 @@
         }
         return true;
       }
-      var xmlhttp;
+      function genPlayerInfoList(data) {
+        var obj;
+        try {
+          obj = JSON.parse(data);
+        } catch(e) {
+          return data;
+        }
+        if (typeof(obj) != "object") {
+            return data;
+        }
+        str = "<ul>";
+        str += ("<li> 账号: " + obj.Account + "</li>");
+        str += ("<li> ID: " + obj.Id + "</li>");
+        str += ("<li> 唯一ID: " + obj.UniqueId + "</li>");
+        str += ("<li> 等级: " + obj.Level + "</li>");
+        str += ("<li> VIP等级: " + obj.VipLevel + "</li>");
+        str += ("<li> 金币: " + obj.Gold + "</li>");
+        str += ("<li> 钻石: " + obj.Diamond + "</li>");
+        str += ("<li> 公会名: " + obj.GuildName + "</li>");
+        str += ("<li> 公会ID: " + obj.GuildId + "</li>");
+        str += ("<li> 公会等级: " + obj.GuildLevel + "</li>");
+        str += ("<li> 解锁关卡: " + obj.UnlockCampaignId + "</li>");
+        str += ("<li> 挂机关卡: " + obj.HungupCampaignId + "</li>");
+        str += ("<li> 竞技场积分: " + obj.ArenaScore + "</li>");
+        str += ("<li> 天赋: " + obj.TalentList + "</li>");
+        str += ("<li> 爬塔: " + obj.TowerId + "</li>");
+        str += ("<li> 签到: " + obj.SignIn + "</li>");
+        str += "</ul>";
+        return str;
+      }
       function getPlayerInfo() {
         if (!checkInputContent()) {
           return;
@@ -35,7 +64,7 @@
           contentType: "application/x-www-form-urlencoded",
           processData: false,
           success: function (resultdata, status) {
-            document.getElementById("player_info").innerHTML = resultdata;
+            document.getElementById("player_info").innerHTML = genPlayerInfoList(resultdata);
             alert('请求发送成功 状态 ' + status + '数据 ' + resultdata);
           },
           error: function (returndata) {
