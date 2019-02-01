@@ -18,14 +18,14 @@
         try {
           obj = JSON.parse(data);
         } catch(e) {
-          return resultdata;
+          return data;
         }
         if (typeof(obj) != "object") {
-          return resultdata;
+          return data;
         }
         if (!Array.isArray(obj.PlayerNum)) {
           alert("不是数组类型");
-          return resultdata;
+          return data;
         }
 
         var str = '<table border="1"><tr><th>Server Id</th><th>人数</th></tr>';
