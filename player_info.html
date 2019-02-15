@@ -21,6 +21,9 @@
         }
         return true;
       }
+      function getLocalTime(nS) {  
+        return new Date(parseInt(nS) * 1000).toLocaleString().replace(new RegExp('/','g'),"-");  
+      }
       function genPlayerInfoList(data) {
         var obj;
         try {
@@ -35,6 +38,10 @@
         str += ("<li> 账号: " + obj.Account + "</li>");
         str += ("<li> ID: " + obj.Id + "</li>");
         str += ("<li> 唯一ID: " + obj.UniqueId + "</li>");
+        str += ("<li> 创建时间: " + getLocalTime(obj.CreateTime) + "</li>");
+        str += ("<li> 是否在线: " + obj.IsLogin + "</li>");
+        str += ("<li> 上次登陆时间: " + getLocalTime(obj.LastLoginTime) + "</li>");
+        str += ("<li> 上次离线时间: " + getLocalTime(obj.LogoutTime) + "</li>");
         str += ("<li> 等级: " + obj.Level + "</li>");
         str += ("<li> VIP等级: " + obj.VipLevel + "</li>");
         str += ("<li> 金币: " + obj.Gold + "</li>");
