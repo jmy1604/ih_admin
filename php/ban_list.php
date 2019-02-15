@@ -47,7 +47,7 @@ while ($row=mysqli_fetch_array($result)) {
     $tab_str = $tab_str . '<td>' . $unique_id . '</td>';
     $tab_str = $tab_str . '<td>' . $account . '</td>';
     $tab_str = $tab_str . '<td>' . $player_id . '</td>';
-    $tab_str = $tab_str . '<td>' . $start_time . '</td>';
+    $tab_str = $tab_str . '<td>' . $start_time . '</td><br>';
 }
 $tab_str = $tab_str . '</table>';
 
