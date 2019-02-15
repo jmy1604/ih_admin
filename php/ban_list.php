@@ -44,10 +44,10 @@ while ($row=mysqli_fetch_array($result)) {
     $account = $row[$tab_headers[BAN_LIST_TABLE_ACCOUNT]];
     $player_id = $row[$tab_headers[BAN_LIST_TABLE_PLAYER_ID]];
     $start_time = $row[$tab_headers[BAN_LIST_TABLE_TIME]];
-    $tab_str = $tab_str . '<td>' . $unique_id . '</td>';
+    $tab_str = $tab_str . '<tr><td>' . $unique_id . '</td>';
     $tab_str = $tab_str . '<td>' . $account . '</td>';
     $tab_str = $tab_str . '<td>' . $player_id . '</td>';
-    $tab_str = $tab_str . '<td>' . $start_time . '</td><br>';
+    $tab_str = $tab_str . '<td>' . $start_time . '</td></tr>';
 }
 $tab_str = $tab_str . '</table>';
 
