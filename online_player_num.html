@@ -28,10 +28,10 @@
           return data;
         }
 
-        var str = '<table border="1"><tr><th>Server Id</th><th>人数</th></tr>';
+        var str = '<table border="1"><tr><th>Server Id</th><th>在线人数</th><th>总人数</th></tr>';
         var a = obj.PlayerNum;
-        for (i=0; i<a.length/2; i++) {
-          str += ('<tr><td>' + a[2*i] + '</td><td>' + a[2*i+1] + '</td></tr>');
+        for (i=0; i<a.length/3; i++) {
+          str += ('<tr><td>' + a[3*i] + '</td><td>' + a[3*i+1] + '</td><td>' + a[3*i+2] + '</td></tr>');
         }
         str += '</table>';
         return str;
