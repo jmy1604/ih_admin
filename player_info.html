@@ -75,7 +75,7 @@
           }*/
           items += '</table>';
         }
-        str += ("<li> 物品: " + items + "</li><br>");
+        str += ("<li> 物品: " + items + "</li>");
 
         var roles; roles = '<table border="1">';
         //roles += '<tr><th>表ID</th><th>ID</th><th>品阶</th><th>等级</th></tr>';
@@ -105,9 +105,9 @@
         /*for (i=0; i<l/4; i++) {
           roles += '<tr><td>' + obj.Roles[i*4+1] + '</td><td>' + obj.Roles[i*4] + '</td><td>' + obj.Roles[i*4+2] + '</td><td>' + obj.Roles[i*4+3] + '</td></tr>';
         }*/
-        str += ("<li> 角色: " + roles + "</li><br>");
+        str += ("<li> 角色: " + roles + "</li>");
+        str += "</ul>"; 
         
-        str += "</ul><br>"; 
         return str;
       }
 
