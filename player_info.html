@@ -55,7 +55,53 @@
         str += ("<li> 天赋: " + obj.TalentList + "</li>");
         str += ("<li> 爬塔: " + obj.TowerId + "</li>");
         str += ("<li> 签到: " + obj.SignIn + "</li>");
-        str += "</ul>";
+        str += "</ul><br>";
+        var items; items = '<table border="1">';
+        //items += "<tr><th>ID</th><th>数量</th></tr>";
+        l = obj.Items.length;
+        items += '<tr><td>ID</td>';
+        for (i=0; i<l/2; i++) {
+          items += ('<td>' + obj.Items[i*2] + '</td>');
+        }
+        items += '</tr>';
+        items += '<tr><td>数量</td>';
+        for (i=0; i<l/2; i++) {
+          items += ('<td>' + obj.Items[i*2+1] + '</td>');
+        }
+        items += '</tr>';
+        /*for (i=0; i<l/2; i++) {
+          items += '<tr><td>' + obj.Items[i*2] + '</td><td>' + obj.Items[i*2+1] + '</td></tr>';
+        }*/
+        items += '</table>';
+        str += ("物品: " + items + "<br>");
+
+        var roles; roles = '<table border="1">';
+        //roles += '<tr><th>表ID</th><th>ID</th><th>品阶</th><th>等级</th></tr>';
+        l = obj.Roles.length;
+        roles += '<tr><td>表ID</td>';
+        for (i=0; i<l/4; i++) {
+          roles += ('<td>' + obj.Roles[i*4+1] + '</td>');
+        }
+        roles += '</tr>';
+        roles += '<tr><td>ID</td>';
+        for (i=0; i<l/4; i++) {
+          roles += ('<td>' + obj.Roles[i*4] + '</td>');
+        }
+        roles += '</tr>';
+        roles += '<tr><td>品阶</td>';
+        for (i=0; i<l/4; i++) {
+          roles += ('<td>' + obj.Roles[i*4+2] + '</td>');
+        }
+        roles += '</tr>';
+        roles += '<tr><td>等级</td>'
+        for (i=0; i<l/4; i++) {
+          roles += ('<td>' + obj.Roles[i*4+3] + '</td>');
+        }
+        roles += '</tr>';
+        /*for (i=0; i<l/4; i++) {
+          roles += '<tr><td>' + obj.Roles[i*4+1] + '</td><td>' + obj.Roles[i*4] + '</td><td>' + obj.Roles[i*4+2] + '</td><td>' + obj.Roles[i*4+3] + '</td></tr>';
+        }*/
+        str += ("角色: " + roles + "<br>");
         return str;
       }
       function getPlayerInfo() {
