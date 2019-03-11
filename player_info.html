@@ -55,7 +55,7 @@
         str += ("<li> 天赋: " + obj.TalentList + "</li>");
         str += ("<li> 爬塔: " + obj.TowerId + "</li>");
         str += ("<li> 签到: " + obj.SignIn + "</li>");
-        str += "</ul><br>";
+
         var items; items = '<table border="1">';
         //items += "<tr><th>ID</th><th>数量</th></tr>";
         if (obj.Items != null) {
@@ -75,7 +75,7 @@
           }*/
           items += '</table>';
         }
-        str += ("物品: " + items + "<br>");
+        str += ("<li> 物品: " + items + "</li><br>");
 
         var roles; roles = '<table border="1">';
         //roles += '<tr><th>表ID</th><th>ID</th><th>品阶</th><th>等级</th></tr>';
@@ -105,9 +105,12 @@
         /*for (i=0; i<l/4; i++) {
           roles += '<tr><td>' + obj.Roles[i*4+1] + '</td><td>' + obj.Roles[i*4] + '</td><td>' + obj.Roles[i*4+2] + '</td><td>' + obj.Roles[i*4+3] + '</td></tr>';
         }*/
-        str += ("角色: " + roles + "<br>");
+        str += ("<li> 角色: " + roles + "</li><br>");
+        
+        str += "</ul><br>"; 
         return str;
       }
+
       function getPlayerInfo() {
         if (!checkInputContent()) {
           return;
