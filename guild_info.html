@@ -21,7 +21,10 @@
         }
         return true;
       }
-      function getLocalTime(nS) {  
+      function getLocalTime(nS) {
+        if (nS == 0) {
+            return "-";
+        }
         return new Date(parseInt(nS) * 1000).toLocaleString().replace(new RegExp('/','g'),"-");  
       }
       function genGuildInfoList(data) {
