@@ -31,10 +31,11 @@ if ($jsd == null) {
 $res = $jsd->{'Res'};
 if ($res < 0) {
     echo("返回错误码: " . $res);
-    return;
+} else {
+    $guild_info = base64_decode($jsd->{'Data'});
+    echo $guild_info;
 }
 
-$guild_info = base64_decode($jsd->{'Data'});
-echo $guild_info;
+save_act("history", ACT_GUILD_INFO, "guild_info", $res, $_SESSION["user_name"], "guild_id($guild_id)");
 
 ?>

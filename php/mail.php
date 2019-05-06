@@ -2,12 +2,19 @@
 include 'http_send.php';
 include 'format_gm_cmd.php';
 include 'config.php';
+include 'act.php';
 
 session_start();
 $login_state = $_SESSION['login_state'];
 if ($login_state <= 0) {
     echo("错误信息: 没有登陆");
     header('Location: ../login.html');
+    return;
+}
+
+$permission = $_SESSION['permission'];
+if ($permission < 1) {
+    echo("权限不够");
     return;
 }
 
@@ -51,9 +58,10 @@ if ($jsd == null) {
 $res = $jsd->{'Res'};
 if ($res < 0) {
     echo("错误信息: " . $res);
-    return;
+} else {
+    echo("操作成功");
 }
 
-echo("操作成功");
+save_act("history", ACT_SYS_MAIL, "sys_mail", $res, $_SESSION["user_name"], "player_id($PlayerId) mail_id($MailID) item_list($ItemList)");
 
 ?>

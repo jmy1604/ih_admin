@@ -2,6 +2,7 @@
 include 'http_send.php';
 include 'format_gm_cmd.php';
 include 'config.php';
+include 'act.php';
 
 session_start();
 $login_state = $_SESSION['login_state'];
@@ -22,7 +23,7 @@ if ($c == null) {
 
 $dbc = new mysqli($c->DBIP, $c->DBUser, $c->DBPassword, $c->DBName);
 if (!$dbc)  {
-    echo("错误信息: 数据库链接错误".$mysql_error());
+    echo("错误信息: 数据库链接错误". mysqli_error($dbc));
     return;
 }
 
@@ -60,6 +61,11 @@ function get_pay_list($dbc, $table_name, $player_id, $order_id, $tab_headers) {
 
 get_pay_list($dbc, 'ApplePays', $player_id, $order_id, $tab_headers);
 get_pay_list($dbc, 'GooglePays', $player_id, $order_id, $tab_headers);
+
+mysqli_close($dbc);
+
 echo '</table>';
+
+save_act("history", ACT_PLAYER_CHARGE_INFO, "player_charge_info", 1, $_SESSION["user_name"], "player_id($player_id) order_id($order_id)");
 
 ?>

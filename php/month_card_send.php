@@ -2,12 +2,19 @@
 include 'http_send.php';
 include 'format_gm_cmd.php';
 include 'config.php';
+include 'act.php';
 
 session_start();
 $login_state = $_SESSION['login_state'];
 if ($login_state <= 0) {
     echo("错误结果: 没有登陆");
     header('Location: ../login.html');
+    return;
+}
+
+$permission = $_SESSION['permission'];
+if ($permission < 1) {
+    echo("权限不够");
     return;
 }
 
@@ -32,9 +39,10 @@ if ($jsd == null) {
 $res = $jsd->{'Res'};
 if ($res < 0) {
     echo("错误码: " . $res);
-    return;
+} else {
+    echo("请求成功");
 }
 
-echo("请求成功");
+save_act("history", ACT_MONTH_CARD_SEND, "month_card_send", $res, $_SESSION["user_name"], "player_id($player_id) bundle_id($bundle_id)");
 
 ?>

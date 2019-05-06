@@ -2,6 +2,7 @@
 include 'http_send.php';
 include 'format_gm_cmd.php';
 include 'config.php';
+include 'act.php';
 
 session_start();
 $login_state = $_SESSION['login_state'];
@@ -31,10 +32,11 @@ if ($jsd == null) {
 $res = $jsd->{'Res'};
 if ($res < 0) {
     echo("返回错误码: " . $res);
-    return;
+} else {
+    $player_info = base64_decode($jsd->{'Data'});
+    echo $player_info;
 }
 
-$player_info = base64_decode($jsd->{'Data'});
-echo $player_info;
+save_act("history", ACT_PLAYER_INFO, "player_info", $res, $_SESSION["user_name"], "player_id($player_id)");
 
 ?>

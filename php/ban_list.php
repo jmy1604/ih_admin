@@ -2,6 +2,7 @@
 include 'http_send.php';
 include 'format_gm_cmd.php';
 include 'config.php';
+include 'act.php';
 
 session_start();
 $login_state = $_SESSION['login_state'];
@@ -53,5 +54,7 @@ $tab_str = $tab_str . '</table>';
 
 echo $tab_str;
 echo("请求完成");
+
+save_act("history", ACT_BAN_LIST, "ban_list", 1, $_SESSION["user_name"], "");
 
 ?>

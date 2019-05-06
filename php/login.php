@@ -29,13 +29,15 @@
         //use user_info数据库；
 		//mysqli_select_db("user_info",$con);
 		$dbusername=null;
-        $dbpassword=null;
+		$dbpassword=null;
+		$permission=0;
         //查出对应用户名的信息，isdelete表示在数据库已被删除的内容
 		$result=mysqli_query($dbc, "select * from accounts where username ='$username';");
         //while循环将$result中的结果找出来
 		while ($row=mysqli_fetch_array($result)) {
 			$dbusername=$row["username"];
 			$dbpassword=$row["password"];
+			$permission=$row["permission"];
         }
         //用户名在数据库中不存在时跳回index.html界面
 		if (is_null($dbusername)) {
@@ -59,6 +61,7 @@
 			else {
 				$_SESSION['login_state'] = 1;
 				$_SESSION['user_name'] = $username;
+				$_SESSION['permission'] = $permission;
 	?>
 	<script type="text/javascript">
 		window.location.href="welcome.php";
