@@ -27,14 +27,14 @@ if (!$dbc)  {
     return;
 }
 
+echo("请求完成");
+
 define("PAY_TABLE_ORDER_ID", "订单ID");
 define("PAY_TABLE_BUNDLE_ID", "BundleID");
 define("PAY_TABLE_ACCOUNT", "玩家账号");
 define("PAY_TABLE_PLAYER_ID", "玩家ID");
 define("PAY_TABLE_TIME", "购买时间");
 $tab_headers = array(PAY_TABLE_ORDER_ID=>'OrderId', PAY_TABLE_BUNDLE_ID=>'BundleId', PAY_TABLE_ACCOUNT=>'Account', PAY_TABLE_PLAYER_ID=>'PlayerId', PAY_TABLE_TIME=>'PayTimeStr');
-
-echo("请求完成");
 
 echo '<table border="1"><tr>' ;
 foreach ($tab_headers as $k=>$v) {

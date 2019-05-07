@@ -24,7 +24,7 @@
 		}
 		$dbc= new mysqli($c->DBIP, $c->DBUser, $c->DBPassword, $c->DBName);
     	if(!$dbc)  {
-      		die("数据库链接错误".$mysql_error());
+      		die("数据库链接错误". mysqli_error($dbc));
     	}
         //use user_info数据库；
 		//mysqli_select_db("user_info",$con);

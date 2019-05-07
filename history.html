@@ -2,15 +2,16 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>IH GM Admin</title>
+<title>History</title>
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 </head>
 <body onload="Load();">
     <p><div id="result"></div></p>
+    <p><div id="history_list"></div></p>
     <script type="text/javascript">
       function Load() {
         $.ajax({
-          url: 'php/gm.php',
+          url: 'php/gen_history.php',
           type: 'POST',
           async: true,
           cache: false,
@@ -22,6 +23,23 @@
           error: function (returndata) {
             alert('请求发送失败');
           }
+        });
+      }
+      function SeeHistory($account, $page) {
+        $.ajax({
+            url: 'php/history.php',
+            type: 'POST',
+            data: 'account='+$account+'&page='+$page,
+            async: true,
+            cache: false,
+            contentType: "application/x-www-form-urlencoded",
+            processData: false,
+            success: function(resultdata, status) {
+                document.getElementById("history_list").innerHTML = resultdata;
+            },
+            error: function(returndata) {
+                alert('请求发送失败');
+            }
         });
       }
     </script>
