@@ -37,6 +37,7 @@
             processData: false,
             success: function(resultdata, status) {
                 document.getElementById("history_list").innerHTML = resultdata;
+                //alert('请求发送成功 状态 ' + status + '数据 ' + resultdata);
             },
             error: function(returndata) {
                 alert('请求发送失败');

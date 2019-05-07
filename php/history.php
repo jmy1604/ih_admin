@@ -45,10 +45,13 @@ $need_fetch = 30;
 $offset = $page * $need_fetch;
 $real_fetch = $need_fetch+1;
 $result;
+$row_num_res;
 if ($account == '') {
     $result = mysqli_query($dbc, "select * from history order by act_time desc limit $offset, $real_fetch;");
+    $row_num_res = mysqli_query($dbc, "select count(*) from history;");
 } else {
     $result = mysqli_query($dbc, "select * from history where act_account='$account' order by act_time desc limit $offset, $real_fetch;");
+    $row_num_res = mysqli_query($dbc, "select count(*) from history where act_account='$account';");
 }
 
 if ($account == "") {
@@ -57,8 +60,12 @@ if ($account == "") {
     echo '<label>当前账号: ' . $account . '</label><br>';
 }
 
+$row = mysqli_fetch_row($row_num_res);
+$row_num = $row[0];
+$total_page = ceil($row_num/$need_fetch);
+
 $display_page = $page + 1;
-echo '<label>当前页: ' . $display_page . '</label><br>';
+echo '<label>当前页: ' . $display_page . '/' . $total_page . '</label><br>';
 
 $cnt = 0;
 while ($row = mysqli_fetch_array($result)) {
