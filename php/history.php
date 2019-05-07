@@ -84,7 +84,7 @@ while ($row = mysqli_fetch_array($result)) {
 }
 
 if ($page > 0) {
-    $prev_page = $page -1;
+    $prev_page = $page - 1;
     echo '<a href="javascript:SeeHistory(\'' . $account . '\', ' . $prev_page . ')"> 上一页 </a>';
 }
 
