@@ -16,11 +16,8 @@ if ($permission < 2) {
     return;
 }
 
-$account=$_POST["account"];
-$page;
-if (!isset($_POST["page"])) {
-    $page = 0;
-} else {
+$page = 0;
+if (isset($_POST["page"])) {
     $page = $_POST["page"];
 }
 
@@ -41,6 +38,7 @@ foreach ($tab_headers as $k=>$v) {
 }
 echo '</tr>';
 
+$account=$_POST["account"];
 $need_fetch = 30;
 $offset = $page * $need_fetch;
 $real_fetch = $need_fetch+1;
